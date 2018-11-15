@@ -184,7 +184,7 @@ class AndroidManifest:
     def createElement(self, under_tag, tag, attributes):
         where = self.xml.getElementsByTagName(under_tag) #adding after the first occurrence
         if len(where) <= 0:
-            raise NoTagException("Cannot find tag: %s" % under_tag)
+            raise NoTagException("Cannot find tag: {}".format(under_tag))
         elem = self.xml.createElement(tag)
         if attributes:
             for entry in attributes.iteritems():

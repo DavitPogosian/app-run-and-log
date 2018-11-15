@@ -7,7 +7,7 @@ import os
 
 
 def install(new_apk_path):
-    cmd = '"%s" install -r "%s"' % (config.ADB_PATH, new_apk_path)
+    cmd = "{} install -r {}".format(config.ADB_PATH, new_apk_path)
     try:
         out = request_pipe(cmd)
     except Exception as e:
@@ -19,7 +19,7 @@ def install(new_apk_path):
 
 
 def uninstall(package):
-    cmd = '"%s" uninstall "%s"' % (config.ADB_PATH, package)
+    cmd = "{} uninstall {}".format(config.ADB_PATH, package)
     try:
         request_pipe(cmd)
     except Exception:
@@ -50,14 +50,14 @@ def request_pipe(cmd):
 
     if pipe.returncode > 0 :
         raise Exception("----------------------------------------------------\n\
-Out: %s\nError: %s" % (out, err))
+Out: {}\nError: {}".format(out, err))
 
     return res.decode('utf-8')
 
 
 def start_activity_explicitly(package_name, activity_name):
     # adb shell am start -n com.package.name/com.package.name.ActivityName
-    logging.debug("Starting activity [%s] of the package [%s]..." % (activity_name, package_name))
+    logging.debug("Starting activity [{}] of the package [{}]...".format(activity_name, package_name))
 
     run_string = package_name + '/' + activity_name
     cmd = "{0} shell am start -n {1}".format(config.ADB_PATH, run_string)
